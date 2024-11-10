@@ -1,0 +1,17 @@
+<h3>Todos List</h3>
+
+@if(!todoItems().length) {
+  <p>Loading...</p>
+}
+
+<form action="">
+  <label for="">Filter Todos</label>
+  <input name="searchTerm" [(ngModel)]="searchTerm" placeholder="Search Todos ..." type="text">
+</form>
+
+<ul>
+  
+@for (todo of todoItems() | filterTodos: searchTerm(); track $index) { <!-- Can change to track you own unique value if you wish. E.g. track todo.id -->
+  <app-todo-item (todoToggled)="updateTodoItem($event)" [todo]="todo" />
+}
+</ul>
